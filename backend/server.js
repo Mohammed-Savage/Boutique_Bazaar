@@ -1,10 +1,10 @@
-// We're importing the express package to create a web server and handle HTTP requests and responses.
-import express from "express";
-// Since our .env file is in the root directory, we need to use the path module to resolve the path to the .env file. This is important for loading environment variables correctly.
-import path from "path";
-import { fileURLToPath } from "url";
-// We're importing the dotenv package to load environment variables from a .env file into process.env. This is useful for managing sensitive information like API keys, database connection strings, etc.
 import dotenv from "dotenv";
+// We're importing the dotenv package to load environment variables from a .env file into process.env. This is useful for managing sensitive information like API keys, database connection strings, etc.
+
+import path from "path";
+// Since our .env file is in the root directory, we need to use the path module to resolve the path to the .env file. This is important for loading environment variables correctly.
+import { fileURLToPath } from "url";
+// We're importing the express package to create a web server and handle HTTP requests and responses.
 
 // This is a workaround to get the current directory name in ES6 modules. It allows us to resolve the path to the .env file correctly.
 const __filename = fileURLToPath(import.meta.url);
@@ -14,6 +14,10 @@ const __dirname = path.dirname(__filename);
 // The dotenv package will look for a .env file in the current working directory and load the variables into process.env.
 // This is useful for managing sensitive information like API keys, database connection strings, etc.
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
+
+import express from "express";
+// We're importing the connectDB function from the config/db.js file to establish a connection to the MongoDB database.
+import { connectDB } from "./config/db.js";
 
 const app = express();
 
@@ -35,6 +39,7 @@ app.delete("/", (req, res) => {
 });
 
 app.listen(5000, () => {
+    connectDB();
     console.log("Server is up and running at http://localhost:5000");
 });
 
