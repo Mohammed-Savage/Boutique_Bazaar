@@ -1,11 +1,15 @@
+// We're importing the express package to create a web server and handle HTTP requests and responses.
 import express from "express";
+// We're importing the dotenv package to load environment variables from a .env file into process.env. This is useful for managing sensitive information like API keys, database connection strings, etc.
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
 // Creating a route with the GET method
-app.get("/products", (req, res) => {
-    
-});
+app.get("/products", (req, res) => { });
+
+console.log(process.env.MONGO_URI);
 // Creating a route with the POST method
 app.post("/", (req, res) => {
     res.send("I'm up, I'm up I said");

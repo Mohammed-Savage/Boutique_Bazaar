@@ -8,5 +8,13 @@ We add "type": "module", to our package.json file so that we can use the modern 
 We added "dev": "node backend/server.js" to the "scripts" section of our package.json file. This allows us to launch our app by running npm run dev instead of typing the file name.
 We also npm i nodemon -D which installs nodemon into our devdependencies. We then updated the "scripts" to "node backend/server.js". This will refresh our app without us having to relaunch it.
 
+We had to downgrade our dependencies and devDependencies from-to these specific versions:
+npm install dotenv@16.4.6 express@4.21.1 mongoose@8.8.3
+npm install --save-dev nodemon@3.1.7
+We also had to delete and reinstall package-lock.json and node_modules/:
+rm -rf node_modules package-lock.json
+npm install
+
+
 Backend Folder Specifics:
 We create the entrypoint for our API: server.js
