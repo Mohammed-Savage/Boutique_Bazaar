@@ -1,23 +1,11 @@
-import dotenv from "dotenv";
-// We're importing the dotenv package to load environment variables from a .env file into process.env. This is useful for managing sensitive information like API keys, database connection strings, etc.
-
-import path from "path";
-// Since our .env file is in the root directory, we need to use the path module to resolve the path to the .env file. This is important for loading environment variables correctly.
-import { fileURLToPath } from "url";
-// We're importing the express package to create a web server and handle HTTP requests and responses.
-
-// This is a workaround to get the current directory name in ES6 modules. It allows us to resolve the path to the .env file correctly.
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-// This loads environment variables from a .env file into process.env. It's important to call this before using any environment variables.
-// The .env file is in the root directory of our project.
-// The dotenv package will look for a .env file in the current working directory and load the variables into process.env.
-// This is useful for managing sensitive information like API keys, database connection strings, etc.
-dotenv.config({ path: path.resolve(__dirname, "../.env") });
-
+// const express = require('express'); This is the traditional way of importing and using Express. We're going to ignore this in favor of our ES6 import syntax. This is the more modern way of importing and using Express.
 import express from "express";
+// We're importing the dotenv package to load environment variables from a .env file into process.env. This is useful for managing sensitive information like API keys, database connection strings, etc.
+import dotenv from "dotenv";
 // We're importing the connectDB function from the config/db.js file to establish a connection to the MongoDB database.
 import { connectDB } from "./config/db.js";
+
+dotenv.config();
 
 const app = express();
 
@@ -42,5 +30,3 @@ app.listen(5000, () => {
     connectDB();
     console.log("Server is up and running at http://localhost:5000");
 });
-
-// const express = require('express'); This is the traditional way of importing and using Express. We're going to ignore this in favor of our ES6 import syntax. This is the more modern way of importing and using Express.
