@@ -12,21 +12,23 @@ const app = express();
 // Creating a route with the GET method
 app.get("/products", (req, res) => { });
 
-console.log("Mongo URI:", process.env.MONGO_URI);
-// Creating a route with the POST method
-app.post("/", (req, res) => {
-    res.send("I'm up, I'm up I said");
-});
-// Creating a route with the PUT method
-app.put("/", (req, res) => {
-    res.send("I'm up, I'm up I said");
-});
-// Creating a route with the DELETE method
-app.delete("/", (req, res) => {
-    res.send("I'm up, I'm up I said");
-});
-
 app.listen(5000, () => {
     connectDB();
     console.log("Server is up and running at http://localhost:5000");
 });
+
+// console.log("Mongo URI:", process.env.MONGO_URI); This is just to test if the Mongo URI is being read correctly from the .env file. It should log the Mongo URI to the console.
+
+// These are the routes we would utilize if we were operating directly from this server.js file:
+// Creating a route with the POST method
+// app.post("/", (req, res) => {
+//     res.send("I'm up, I'm up I said");
+// });
+// Creating a route with the PUT method
+// app.put("/", (req, res) => {
+//     res.send("I'm up, I'm up I said");
+// });
+// // Creating a route with the DELETE method
+// app.delete("/", (req, res) => {
+//     res.send("I'm up, I'm up I said");
+// });
