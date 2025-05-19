@@ -2,6 +2,23 @@ import express from "express";
 
 const app = express();
 
+// Creating a route with the GET method
+app.get("/", (req, res) => {
+    res.send("I'm up, I'm up I said. What do you want?");
+});
+// Creating a route with the POST method
+app.post("/", (req, res) => {
+    res.send("I'm up, I'm up I said");
+});
+// Creating a route with the PUT method
+app.put("/", (req, res) => {
+    res.send("I'm up, I'm up I said");
+});
+// Creating a route with the DELETE method
+app.delete("/", (req, res) => {
+    res.send("I'm up, I'm up I said");
+});
+
 app.listen(5000, () => {
     console.log("Server is up and running at http://localhost:5000");
 });
