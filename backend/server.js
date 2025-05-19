@@ -3,8 +3,8 @@ import express from "express";
 const app = express();
 
 // Creating a route with the GET method
-app.get("/", (req, res) => {
-    res.send("I'm up, I'm up I said. What do you want?");
+app.get("/products", (req, res) => {
+    
 });
 // Creating a route with the POST method
 app.post("/", (req, res) => {
