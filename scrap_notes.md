@@ -24,3 +24,7 @@ There are SQL databases such as MySQL, PostgreSQL but Mongo is a NON-SQL databas
 
 Frontend specifics:
 To test our work without a working front end we use the Postman Desktop app.
+
+if(!product.name || !product.description || !product.price || !product.image) {
+        return res.status(400).json({ success:false, message: "Please fill in all the fields" });
+    }

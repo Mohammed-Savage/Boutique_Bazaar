@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 // We're importing the connectDB function from the config/db.js file to establish a connection to the MongoDB database.
 import { connectDB } from "./config/db.js";
 import Product from "./models/product.model.js";
+import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -30,8 +31,8 @@ app.get("/api/products", async (req, res) => {
 app.post("/api/products", async (req, res) => {
     const product = req.body; //This is the data the user enters.
 
-    if(!product.name || !product.description || !product.price || !product.image) {
-        return res.status(400).json({ success:false, message: "Please fill in all the fields" });
+    if (!product.name || !product.description || !product.price || !product.image) {
+        return res.status(400).json({ success: false, message: "Please fill in all the fields" });
     }
 
     const newProduct = new Product(product)
@@ -44,6 +45,23 @@ app.post("/api/products", async (req, res) => {
         res.status(500).json({ success: false, message: "Server Error" });
     }
 });
+
+app.put("/api/products/:id", async (req, res) => {
+    const { id } = req.params;
+    const product = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ success: false, message: "Product not found." });
+    }
+
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(id, product, { new: true });
+        res.status(200).json({ success: true, data: updatedProduct });
+    } catch (error) {
+        console.error("Error in Update product:", error.message);
+        res.status(500).json({ success: false, message: "Server Error" });
+    }
+})
 
 app.delete("/api/products/:id", async (req, res) => {
     const { id } = req.params;
