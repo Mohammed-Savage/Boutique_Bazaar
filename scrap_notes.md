@@ -21,3 +21,6 @@ We create the entrypoint for our API: server.js
 
 Database specifics:
 There are SQL databases such as MySQL, PostgreSQL but Mongo is a NON-SQL database. This means that while SQL databases store our data in tables with rows and colums, NON-SQL databases store information as "collections". The benefit being you can create multiple collections for multiple purposes, each with their own subsection of documents.
+
+Frontend specifics:
+To test our work without a working front end we use the Postman Desktop app.

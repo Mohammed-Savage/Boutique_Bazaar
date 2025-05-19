@@ -4,13 +4,32 @@ import express from "express";
 import dotenv from "dotenv";
 // We're importing the connectDB function from the config/db.js file to establish a connection to the MongoDB database.
 import { connectDB } from "./config/db.js";
+import Product from "./models/product.model.js";
 
 dotenv.config();
 
 const app = express();
 
+app.use(express.json()); // This middleware parses incoming JSON requests and makes the data available in req.body.
+
 // Creating a route with the GET method
-app.get("/products", (req, res) => { });
+app.post("/api/products", async (req, res) => {
+    const product = req.body; //This is the data the user enters.
+
+    if(!product.name || !product.description || !product.price || !product.image) {
+        return res.status(400).json({ success:false, message: "Please fill in all the fields" });
+    }
+
+    const newProduct = new Product(product)
+
+    try {
+        await newProduct.save();
+        res.status(201).json({ success: true, data: newProduct });
+    } catch (error) {
+        console.error("Error in Create product:", error.message);
+        res.status(500).json({ success: false, message: "Server Error" });
+    }
+});
 
 app.listen(5000, () => {
     connectDB();

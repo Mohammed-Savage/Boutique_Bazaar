@@ -46,7 +46,7 @@ const productSchema = new mongoose.Schema(
 // The productSchema defines the structure of the product documents in the MongoDB database. Each product has fields like name, image, brand, category, description, rating, number of reviews, and price. The schema also includes validation rules, such as required fields and default values.
 // The timestamps option automatically adds createdAt and updatedAt fields to the documents, which can be useful for tracking when products were added or modified.
 
-// This creates a model called Product based on the productSchema. The model is used to interact with the products collection in the MongoDB database.
+// This instructs mongoose to create a model named "Product" based on the productSchema we defined above. This model will be used to interact with the products collection in the MongoDB database.
 const Product = mongoose.model("Product", productSchema);
 // This exports the Product model so it can be used in other parts of the application.
 export default Product;
