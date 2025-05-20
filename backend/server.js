@@ -4,8 +4,8 @@ import express from "express";
 import dotenv from "dotenv";
 // We're importing the connectDB function from the config/db.js file to establish a connection to the MongoDB database.
 import { connectDB } from "./config/db.js";
-import Product from "./models/product.model.js";
-import mongoose from "mongoose";
+import productRoutes from "./routes/product.route.js"; // Importing the product routes from the product.route.js file. This is where we'll define our API endpoints for product-related operations.
+
 
 dotenv.config();
 
@@ -13,66 +13,7 @@ const app = express();
 
 app.use(express.json()); // This middleware parses incoming JSON requests and makes the data available in req.body.
 
-app.get("/api/products", async (req, res) => {
-    try {
-        const products = await Product.find({}); // This retrieves all products from our database.
-        res.status(200).json({ success: true, data: products });
-    } catch (error) {
-        console.log("Error retrieving products:", error.message);
-        res.status(500).json({ success: false, message: "Server Error" });
-    }
-});
-// This is a route that handles GET requests to the "/api/products" endpoint. It retrieves all products from the database and sends them back in the response.
-// The async/await syntax is used to handle asynchronous operations, making the code cleaner and easier to read.
-// The try/catch block is used to handle any errors that may occur during the database operation. If an error occurs, a 500 status code is sent back with an error message.
-// The res.status(200).json({ success: true, data: products }) line sends a JSON response with a 200 status code, indicating that the request was successful and includes the retrieved products in the response body.
-
-// Creating a route with the GET method
-app.post("/api/products", async (req, res) => {
-    const product = req.body; //This is the data the user enters.
-
-    if (!product.name || !product.description || !product.price || !product.image) {
-        return res.status(400).json({ success: false, message: "Please fill in all the fields" });
-    }
-
-    const newProduct = new Product(product)
-
-    try {
-        await newProduct.save();
-        res.status(201).json({ success: true, data: newProduct });
-    } catch (error) {
-        console.error("Error in Create product:", error.message);
-        res.status(500).json({ success: false, message: "Server Error" });
-    }
-});
-
-app.put("/api/products/:id", async (req, res) => {
-    const { id } = req.params;
-    const product = req.body;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({ success: false, message: "Product not found." });
-    }
-
-    try {
-        const updatedProduct = await Product.findByIdAndUpdate(id, product, { new: true });
-        res.status(200).json({ success: true, data: updatedProduct });
-    } catch (error) {
-        console.error("Error in Update product:", error.message);
-        res.status(500).json({ success: false, message: "Server Error" });
-    }
-})
-
-app.delete("/api/products/:id", async (req, res) => {
-    const { id } = req.params;
-    try {
-        await Product.findByIdAndDelete(id);
-        res.status(200).json({ success: true, message: "Product deleted successfully" });
-    } catch (error) {
-        console.error("Error in Delete product:", error.message);
-        res.status(500).json({ success: false, message: "Prodcut not found in inventory" });
-    }
-});
+app.use("/api/products", productRoutes); // This sets up the product routes. Any request to /api/products will be handled by the routes defined in product.route.js.
 
 app.listen(5000, () => {
     connectDB();
