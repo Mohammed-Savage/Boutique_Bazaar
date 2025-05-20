@@ -10,14 +10,18 @@ import productRoutes from "./routes/product.route.js"; // Importing the product 
 dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 5000; // This sets the port for our server. If the PORT environment variable is not set, it defaults to 5000.
 
 app.use(express.json()); // This middleware parses incoming JSON requests and makes the data available in req.body.
 
 app.use("/api/products", productRoutes); // This sets up the product routes. Any request to /api/products will be handled by the routes defined in product.route.js. Our CRUD operations will all be prefixed with /api/products.
 
-app.listen(5000, () => {
+app.listen(PORT, () => {
     connectDB();
-    console.log("Server is up and running at http://localhost:5000");
+    console.log("Server is up and running at http://localhost:" + PORT);
+    // This logs a message to the console indicating that the server is running and listening on the specified port.
+    // The connectDB function is called to establish a connection to the MongoDB database.
+    // The connectDB function is defined in the config/db.js file and is responsible for connecting to the MongoDB database.
 });
 
 // console.log("Mongo URI:", process.env.MONGO_URI); This is just to test if the Mongo URI is being read correctly from the .env file. It should log the Mongo URI to the console.
