@@ -13,7 +13,7 @@ const app = express();
 
 app.use(express.json()); // This middleware parses incoming JSON requests and makes the data available in req.body.
 
-app.use("/api/products", productRoutes); // This sets up the product routes. Any request to /api/products will be handled by the routes defined in product.route.js.
+app.use("/api/products", productRoutes); // This sets up the product routes. Any request to /api/products will be handled by the routes defined in product.route.js. Our CRUD operations will all be prefixed with /api/products.
 
 app.listen(5000, () => {
     connectDB();
