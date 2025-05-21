@@ -57,7 +57,8 @@ const CreatePage = () => {
                             onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
                         />
 
-                        <Button colorScheme='blue' onClick={handleAddProduct} w='full'>
+                        <Button colorScheme='blue' onClick={handleAddProduct} w='full' fontFamily={"monospace"}>
+                            {/* 𝓐𝓭𝓭 𝓟𝓻𝓸𝓭𝓾𝓬𝓽 */}
                             Add Product
                         </Button>
                     </VStack>
