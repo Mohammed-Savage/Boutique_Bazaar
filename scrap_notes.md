@@ -40,3 +40,5 @@ then force Node 20 as the default version:
 nvm alias default 20
 Periodcially check our current node version by running:
 node -v
+
+If we're so inclined we may install and use snippets for easier code construction: ES7+ React/Redux/React-Native snippets
