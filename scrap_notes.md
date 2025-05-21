@@ -33,6 +33,10 @@ npm install @chakra-ui/icons@v2.1.1
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-In order for our front end npm run dev to work, we also need to update our node.js. to a minimum of V 20 so we don't get any $crypto erros when we try running npm run dev in our front end by running the following terminal commands:
+In order for our front end npm run dev to work, we also need to update our node.js. to a minimum of V 20 so we don't get any $crypto erros when we try running npm run dev in our front end by running the following terminal commands in our root directory:
 nvm install 20
 nvm use 20
+then force Node 20 as the default version:
+nvm alias default 20
+Periodcially check our current node version by running:
+node -v
