@@ -42,3 +42,5 @@ Periodcially check our current node version by running:
 node -v
 
 If we're so inclined we may install and use snippets for easier code construction: ES7+ React/Redux/React-Native snippets
+
+We changed the colorModeValue in app.jsx. Fiddle with it if it doesn't look appealing.
