@@ -29,3 +29,10 @@ We specifically install and run older versions of the following due to stability
 
 npm install @chakra-ui/react@v2.10.3 @emotion/react @emotion/styled framer-motion
 npm install @chakra-ui/icons@v2.1.1
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+In order for our front end npm run dev to work, we also need to update our node.js. to a minimum of V 20 so we don't get any $crypto erros when we try running npm run dev in our front end by running the following terminal commands:
+nvm install 20
+nvm use 20
