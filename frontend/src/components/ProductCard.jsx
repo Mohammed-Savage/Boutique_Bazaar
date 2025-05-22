@@ -1,4 +1,4 @@
-import { Box, Heading, Image, Text, HStack, IconButton, useColorModeValue } from '@chakra-ui/react';
+import { Box, Heading, Image, Text, HStack, IconButton, useColorModeValue, Tooltip } from '@chakra-ui/react';
 import { FaEdit } from "react-icons/fa";
 import { FcDeleteRow } from "react-icons/fc";
 import React from 'react'
@@ -37,10 +37,14 @@ const ProductCard = ({ product }) => {
                     {/* ${product.price} */}
                 </Text>
                 <HStack spacing={2}>
-                    <IconButton icon={<FaEdit />} colorScheme='blue' />
-                    <IconButton icon={<FcDeleteRow />}
-                        colorScheme='red'
-                    />
+                    <Tooltip label='Edit Product' aria-label='Edit Product' fontSize='md'>
+                        <IconButton icon={<FaEdit />} colorScheme='blue' />
+                    </Tooltip>
+                    <Tooltip label='Delete Product' aria-label='Delete Product' fontSize='md'>
+                        <IconButton icon={<FcDeleteRow />}
+                            colorScheme='red'
+                        />
+                    </Tooltip>
                 </HStack>
             </Box>
         </Box>
