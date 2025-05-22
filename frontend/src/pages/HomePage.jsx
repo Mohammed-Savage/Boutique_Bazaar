@@ -39,18 +39,18 @@ const HomePage = () => {
                         <ProductCard key={product._id} product={product} />
                     ))}
                 </SimpleGrid>
-                
+
                 {products.length === 0 && (
                     <Text fontSize={"xl"} textAlign={"center"} fontWeight={"bold"} color={"gray.500"}>
-                    Inventory empty 😵{"  "}
-                    <Link to={"/create"}>
-                        <Text as='span' color={"blue.500"} _hover={{ textDecoration: "underline" }}>
-                            Create your first product
-                        </Text>
-                    </Link>
-                </Text>
+                        Inventory empty 😵{"  "}
+                        <Link to={"/create"}>
+                            <Text as='span' color={"blue.500"} _hover={{ textDecoration: "underline" }}>
+                                List your first product
+                            </Text>
+                        </Link>
+                    </Text>
                 )}
-                
+
             </VStack>
         </Container>
     )
