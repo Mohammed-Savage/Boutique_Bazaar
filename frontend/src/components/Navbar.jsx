@@ -25,6 +25,21 @@ const Navbar = () => {
                 bgGradient={"linear(to-r, cyan.400, blue.500)"}
                 bgClip={"text"}
                 fontFamily={"ocr-a st"}
+                letterSpacing={"wider"}
+                // Optional styling. Feel free to change it.
+                textShadow={"0 0 10px rgba(0, 0, 0, 0.5)"}
+                _hover={{
+                    textShadow: "0 0 20px rgba(0, 0, 0, 0.5)",
+                    transition: "text-shadow 0.3s ease-in-out",
+                }}
+                _focus={{
+                    outline: "none",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.5)",
+                }}
+                _active={{
+                    transform: "scale(0.95)",
+                    transition: "transform 0.1s ease-in-out",
+                }}
             >
                 <Link to={"/"}>🎁 Product Inventory</Link>
             </Text>
