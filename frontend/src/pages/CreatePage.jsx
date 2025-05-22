@@ -1,5 +1,6 @@
-import { Box, Button, Container, Heading, Input, useColorModeValue, VStack } from "@chakra-ui/react";
+import { Box, Button, Container, Heading, Input, useColorModeValue, useToast, VStack } from "@chakra-ui/react";
 import { useState } from "react";
+import { useProductStore } from "../store/product";
 
 const CreatePage = () => {
     const [newProduct, setNewProduct] = useState({
@@ -8,10 +9,39 @@ const CreatePage = () => {
         price: "",
         image: "",
     });
+    const toast = useToast();
 
-    const handleAddProduct = () => {
+    const { createProduct } = useProductStore();
+
+    const handleAddProduct = async () => {
+        const { success, message } = await createProduct(newProduct);
+        if (!success) {
+            toast({
+                title: "Empty Field(s)",
+                description: message,
+                status: "error",
+                isClosable: true,
+                duration: 5000,
+                // position: "top",
+            });
+        } else {
+            toast({
+                title: "You did it!",
+                description: message,
+                status: "success",
+                isClosable: true,
+                duration: 3000,
+                // position: "top",
+            });
+        }
         // Logic to add the product
-        console.log("Product added:", newProduct);
+        // console.log("Success:", success);
+        // console.log("Message:", message);
+        // Optionally, you can redirect the user to another page or clear the form
+        // For example, using react-router-dom's useHistory or useNavigate
+        // history.push("/"); // Redirect to home page
+        // or
+        // navigate("/"); // Redirect to home page
         // Reset the form
         setNewProduct({
             name: "",

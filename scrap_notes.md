@@ -44,3 +44,5 @@ node -v
 If we're so inclined we may install and use snippets for easier code construction: ES7+ React/Redux/React-Native snippets
 
 We changed the colorModeValue in app.jsx. Fiddle with it if it doesn't look appealing.
+
+We also une npm i zustand to create the product.js file in src/store to globally store our product state.
