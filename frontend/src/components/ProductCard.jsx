@@ -1,4 +1,4 @@
-import { Box, Heading, Image, Text, HStack, IconButton, useColorModeValue, Tooltip } from '@chakra-ui/react';
+import { Box, Heading, Image, Text, HStack, IconButton, useColorModeValue, Tooltip, Flex } from '@chakra-ui/react';
 import { FaEdit } from "react-icons/fa";
 import { FcDeleteRow } from "react-icons/fc";
 import React from 'react'
