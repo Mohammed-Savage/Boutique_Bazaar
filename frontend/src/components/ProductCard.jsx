@@ -36,7 +36,7 @@ const ProductCard = ({ product }) => {
                     }).format(product.price)}
                     {/* ${product.price} */}
                 </Text>
-                <HStack spacing={2}>
+                <HStack spacing={2} justifyContent={"space-between"}>
                     <Tooltip label='Edit Product' aria-label='Edit Product' fontSize='md'>
                         <IconButton icon={<FaEdit />} colorScheme='blue' />
                     </Tooltip>

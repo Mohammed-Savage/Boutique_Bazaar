@@ -21,6 +21,7 @@ const CreatePage = () => {
                 description: message,
                 status: "error",
                 isClosable: true,
+                position: "top",
                 duration: 5000,
                 // position: "top",
             });
@@ -30,6 +31,7 @@ const CreatePage = () => {
                 description: message,
                 status: "success",
                 isClosable: true,
+                position: "top",
                 duration: 3000,
                 // position: "top",
             });
@@ -68,7 +70,7 @@ const CreatePage = () => {
                             onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
                         />
                         <Input
-                            placeholder='Description'
+                            placeholder='Product Description'
                             name='description'
                             value={newProduct.description}
                             onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
