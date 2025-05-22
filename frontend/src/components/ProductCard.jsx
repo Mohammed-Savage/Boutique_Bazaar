@@ -1,10 +1,33 @@
-import { Box, Heading, Image, Text, HStack, IconButton, useColorModeValue, Tooltip, Flex } from '@chakra-ui/react';
+import { Box, Heading, Image, Text, HStack, IconButton, useColorModeValue, Tooltip, Flex, useToast } from '@chakra-ui/react';
 import { FaEdit } from "react-icons/fa";
 import { FcDeleteRow } from "react-icons/fc";
+import { useProductStore } from '../store/product.js';
 import React from 'react'
 
 const ProductCard = ({ product }) => {
 
+    const { deleteProduct, updateProduct } = useProductStore();
+    const toast = useToast();
+    const handleDeleteProduct = async (pid) => {
+        const { success, message } = await deleteProduct(pid);
+        if (!success) {
+            toast({
+                title: "Error",
+                description: message,
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+            });
+        } else {
+            toast({
+                title: "Success",
+                description: message,
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+            });
+        }
+    }
     const textColor = useColorModeValue("gray.600", "gray.200");
     const bg = useColorModeValue("white", "#162456");
 
@@ -41,7 +64,7 @@ const ProductCard = ({ product }) => {
                         <IconButton icon={<FaEdit />} colorScheme='blue' />
                     </Tooltip>
                     <Tooltip label='Delete Product' aria-label='Delete Product' fontSize='md'>
-                        <IconButton icon={<FcDeleteRow />}
+                        <IconButton icon={<FcDeleteRow />} onClick={() => handleDeleteProduct(product._id)}
                             colorScheme='red'
                         />
                     </Tooltip>
