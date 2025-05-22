@@ -21,8 +21,46 @@ export const useProductStore = create((set) => ({
         return { success: true, message: "Product created successfully" };
     },
     fetchProducts: async () => {
-        const res = await fetch("/api/products");
-        const data = await res.json();
-        set({ products: data.data });
+        try {
+            const res = await fetch("/api/products");
+            if (!res.ok) {
+                const errorData = await res.json();
+                console.error("Fetch error:", errorData.message);
+                return;
+            }
+
+            const data = await res.json();
+            set({ products: data.data });
+        } catch (error) {
+            console.error("Network error in fetchProducts:", error.message);
+        }
+    },
+    deleteProduct: async (pid) => {
+        try {
+            const res = await fetch(`/api/products/${pid}`, {
+                method: "DELETE",
+            });
+
+            if (!res.ok) {
+                const errorData = await res.json();
+                console.error("Delete error:", errorData.message);
+                return { success: false, message: errorData.message };
+            }
+
+            const data = await res.json();
+
+            if (!data.success) {
+                return { success: false, message: data.message };
+            }
+            // This is us updating the state to remove the deleted product from the products page in our UI wihtout having to refresh the page.
+            set((state) => ({
+                products: state.products.filter((product) => product._id !== pid),
+            }));
+
+            return { success: true, message: data.message };
+        } catch (err) {
+            console.error("Network error in deleteProduct:", err.message);
+            return { success: false, message: "Something went wrong. Please try again." };
+        }
     },
 }))
