@@ -1,3 +1,28 @@
+# Build output
+**/dist/
+**/build/
+
+# Cache
+.npm/
+.cache/
+.vite/
+
+# Editor directories and files
+.vscode/
+.idea/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by testing tools like Jest
+coverage/
+
+# Mac-specific files
+*.DS_Store
+
 # Node modules
 **/node_modules/
 
@@ -11,3 +36,4 @@ logs
 # OS files
 .DS_Store
 Thumbs.db
+
