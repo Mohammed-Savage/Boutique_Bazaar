@@ -1,4 +1,4 @@
-import { Box, Heading, Image, Text, HStack, IconButton, useColorModeValue, Tooltip, Flex, useToast, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, VStack, Input, ModalFooter, Button, useDisclosure } from '@chakra-ui/react';
+import { Box, Heading, Image, Text, HStack, IconButton, useColorModeValue, Tooltip, Flex, useToast, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, VStack, Input, ModalFooter, Button, useDisclosure, Skeleton, } from '@chakra-ui/react';
 import { FaEdit } from "react-icons/fa";
 import { FcDeleteRow } from "react-icons/fc";
 import { useProductStore } from '../store/product.js';
@@ -6,6 +6,7 @@ import { useState } from 'react'
 
 const ProductCard = ({ product }) => {
     const [updatedProduct, setUpdatedProduct] = useState(product);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const textColor = useColorModeValue("gray.600", "gray.200");
     const bg = useColorModeValue("white", "#162456");
@@ -83,7 +84,9 @@ const ProductCard = ({ product }) => {
             }}
             bg={bg}
         >
-            <Image src={product.image} alt={product.name} h={48} w={"full"} objectFit={"cover"} />
+            <Skeleton isLoaded={isLoaded} height="192px" width="100%" fadeDuration={0.5} startColor='gray.100' endColor='gray.200'>
+                <Image src={product.image} alt={product.name} h={48} w={"full"} objectFit={"cover"} loading='lazy' onLoad={() => setIsLoaded(true)} />
+            </Skeleton>
             <Box p={4}>
                 <Heading as={"h3"} size={"md"} mb={2}>
                     {product.name}
