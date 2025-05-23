@@ -2,16 +2,19 @@ import { Box, Heading, Image, Text, HStack, IconButton, useColorModeValue, Toolt
 import { FaEdit } from "react-icons/fa";
 import { FcDeleteRow } from "react-icons/fc";
 import { useProductStore } from '../store/product.js';
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const ProductCard = ({ product }) => {
     const [updatedProduct, setUpdatedProduct] = useState(product);
 
+    const textColor = useColorModeValue("gray.600", "gray.200");
+    const bg = useColorModeValue("white", "#162456");
+    // const { bg: bg2 } = useColorModeValue("gray.100", "gray.700");
+    // const { bg: bg3 } = useColorModeValue("gray.200", "gray.600");
+    // const { bg: bg4 } = useColorModeValue("gray.300", "gray.500");
     const { deleteProduct, updateProduct } = useProductStore();
     const toast = useToast();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const textColor = useColorModeValue("gray.600", "gray.200");
-    const bg = useColorModeValue("white", "#162456");
 
     const handleDeleteProduct = async (pid) => {
         const { success, message } = await deleteProduct(pid);
@@ -97,7 +100,7 @@ const ProductCard = ({ product }) => {
                 </Text>
                 <HStack spacing={2} justifyContent={"space-between"}>
                     <Tooltip label='Edit Product' aria-label='Edit Product' fontSize='md'>
-                        <IconButton icon={<FaEdit />} onClick={onOpen} colorScheme='blue' />
+                        <IconButton icon={<FaEdit />} onClick={onOpen} colorScheme='blue' aria-label='Edit Product' />
                     </Tooltip>
                     <Tooltip label='Delete Product' aria-label='Delete Product' fontSize='md'>
                         <IconButton icon={<FcDeleteRow />} onClick={() => handleDeleteProduct(product._id)}
@@ -153,5 +156,3 @@ const ProductCard = ({ product }) => {
 };
 
 export default ProductCard;
-
-// Update line 90 to remove align="stretch" if it looks bad or is breaking our app.
