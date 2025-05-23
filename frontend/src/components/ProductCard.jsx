@@ -2,9 +2,10 @@ import { Box, Heading, Image, Text, HStack, IconButton, useColorModeValue, Toolt
 import { FaEdit } from "react-icons/fa";
 import { FcDeleteRow } from "react-icons/fc";
 import { useProductStore } from '../store/product.js';
-import React from 'react'
+import React, { useState } from 'react'
 
 const ProductCard = ({ product }) => {
+    const [updatedProduct, setUpdatedProduct] = useState(product);
 
     const { deleteProduct, updateProduct } = useProductStore();
     const toast = useToast();
@@ -93,19 +94,23 @@ const ProductCard = ({ product }) => {
                             <Input
                                 placeholder='Product Name'
                                 name='name'
+                                value={updatedProduct.name}
                                 />
                             <Input
                                 placeholder='Product Description'
                                 name='description'
+                                value={updatedProduct.description}
                                 />
                             <Input
                                 placeholder='Price'
                                 name='price'
                                 type='number'
+                                value={updatedProduct.price}
                                 />
                             <Input
                                 placeholder='Image URL'
                                 name='image'
+                                value={updatedProduct.image}
                                 />
                                 </VStack>
                                 </ModalBody>
