@@ -1,4 +1,4 @@
-import { Box, Heading, Image, Text, HStack, IconButton, useColorModeValue, Tooltip, Flex, useToast } from '@chakra-ui/react';
+import { Box, Heading, Image, Text, HStack, IconButton, useColorModeValue, Tooltip, Flex, useToast, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, VStack, Input, ModalFooter, Button, useDisclosure } from '@chakra-ui/react';
 import { FaEdit } from "react-icons/fa";
 import { FcDeleteRow } from "react-icons/fc";
 import { useProductStore } from '../store/product.js';
@@ -8,6 +8,8 @@ const ProductCard = ({ product }) => {
 
     const { deleteProduct, updateProduct } = useProductStore();
     const toast = useToast();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     const handleDeleteProduct = async (pid) => {
         const { success, message } = await deleteProduct(pid);
         if (!success) {
@@ -42,6 +44,7 @@ const ProductCard = ({ product }) => {
                 boxShadow: "2xl",
                 cursor: "pointer",
                 transform: "translateY(-5px) scale(1.05)",
+                // opacity: 0.3,
             }}
             _focus={{
                 outline: "none",
@@ -71,7 +74,7 @@ const ProductCard = ({ product }) => {
                 </Text>
                 <HStack spacing={2} justifyContent={"space-between"}>
                     <Tooltip label='Edit Product' aria-label='Edit Product' fontSize='md'>
-                        <IconButton icon={<FaEdit />} colorScheme='blue' />
+                        <IconButton icon={<FaEdit />} onClick={onOpen} colorScheme='blue' />
                     </Tooltip>
                     <Tooltip label='Delete Product' aria-label='Delete Product' fontSize='md'>
                         <IconButton icon={<FcDeleteRow />} onClick={() => handleDeleteProduct(product._id)}
@@ -80,8 +83,44 @@ const ProductCard = ({ product }) => {
                     </Tooltip>
                 </HStack>
             </Box>
+            <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Update Product</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <VStack spacing={4} align="stretch">
+                            <Input
+                                placeholder='Product Name'
+                                name='name'
+                                />
+                            <Input
+                                placeholder='Product Description'
+                                name='description'
+                                />
+                            <Input
+                                placeholder='Price'
+                                name='price'
+                                type='number'
+                                />
+                            <Input
+                                placeholder='Image URL'
+                                name='image'
+                                />
+                                </VStack>
+                                </ModalBody>
+                                <ModalFooter>
+                                    <Button colorScheme='blue' mr={3}>
+                                        Update
+                                    </Button>
+                                    <Button variant='ghost' onClick={onClose} >Cancel</Button>
+                                </ModalFooter>
+                </ModalContent>
+            </Modal>
         </Box>
     );
 }
 
 export default ProductCard;
+
+// Update line 90 to remove align="stretch" if it looks bad or is breaking our app.
