@@ -63,4 +63,37 @@ export const useProductStore = create((set) => ({
             return { success: false, message: "Something went wrong. Please try again." };
         }
     },
-}))
+    updateProduct: async (pid, updatedProduct) => {
+        try {
+            const res = await fetch(`/api/products/${pid}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedProduct),
+            });
+
+            if (!res.ok) {
+                const errorData = await res.json();
+                console.error("Update error:", errorData.message);
+                return { success: false, message: errorData.message };
+            }
+
+            const data = await res.json();
+
+            if (!data.success) {
+                return { success: false, message: data.message };
+            }
+
+            // This is us updating the state to display the updated product details in the UI immediately without having to refresh the page.
+            set((state) => ({
+                products: state.products.map((product) => (product._id === pid ? data.data : product)),
+            }));
+
+            return { success: true, message: data.message };
+        } catch (err) {
+            console.error("Network error in updateProduct:", err.message);
+            return { success: false, message: "Something went wrong. Please try again." };
+        }
+    },
+}));
