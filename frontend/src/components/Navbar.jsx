@@ -1,4 +1,4 @@
-import { Container, Flex, Text, HStack, Button, useColorMode } from "@chakra-ui/react";
+import { Container, Flex, Text, HStack, Button, useColorMode, Tooltip } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { FaCartPlus } from "react-icons/fa";
 import { RxMoon } from "react-icons/rx";
@@ -45,13 +45,17 @@ const Navbar = () => {
             </Text>
             <HStack spacing={2} alignItems={"center"}>
                 <Link to={"/create"}>
-                    <Button>
-                        <FaCartPlus fontSize={20} />
-                    </Button>
+                    <Tooltip label="Add a New Product" fontSize='md'>
+                        <Button variant="ghost">
+                            <FaCartPlus fontSize={20} />
+                        </Button>
+                    </Tooltip>
                 </Link>
-                <Button onClick={toggleColorMode}>
-                    {colorMode === "light" ? <RxMoon size='20' color="blue" /> : <GiStripedSun size='20' color="yellow" />}
-                </Button>
+                <Tooltip label={colorMode === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"} fontSize='md'>
+                    <Button onClick={toggleColorMode} variant="ghost">
+                        {colorMode === "light" ? <RxMoon size='20' color="blue" /> : <GiStripedSun size='20' color="yellow" />}
+                    </Button>
+                </Tooltip>
             </HStack>
         </Flex>
     </Container>;
