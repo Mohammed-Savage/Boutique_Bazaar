@@ -1,4 +1,4 @@
-import { Container, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import { Container, SimpleGrid, Text, VStack, Heading } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import React, { useEffect } from 'react'
 import { useProductStore } from '../store/product.js';
@@ -14,7 +14,7 @@ const HomePage = () => {
     return (
         <Container maxW={"container.xl"} py={12}>
             <VStack spacing={8}>
-                <Text
+                {/* <Text
                     fontSize={{ base: "30", md: "20" }}
                     fontWeight="bold"
                     textAlign="center"
@@ -24,9 +24,11 @@ const HomePage = () => {
                     lineHeight="shorter"
                     bgGradient={"linear(to-r, cyan.400, blue.500)"}
                     bgClip={"text"}
-                >
+                > */}
+                <Heading as={"h1"} size={"2xl"} textAlign={"center"} mb={8} fontWeight={"semibold"} fontFamily={"optima"}>
                     Product Lineup 🛍️
-                </Text>
+                </Heading>
+                {/* </Text> */}
                 <SimpleGrid
                     columns={{ base: 1, md: 2, lg: 3 }}
                     spacing={10}
