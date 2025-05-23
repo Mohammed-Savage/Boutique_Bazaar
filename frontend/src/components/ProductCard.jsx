@@ -37,10 +37,20 @@ const ProductCard = ({ product }) => {
             rounded={"lg"}
             overflow={"hidden"}
             transition={"all 0.3s ease-in-out"}
+            tabIndex={0} // Makes the box focusable with keyboard
             _hover={{
-                transform: "translateY(-5px)",
-                transform: "scale(1.05)",
-                shadow: "xl",
+                boxShadow: "2xl",
+                cursor: "pointer",
+                transform: "translateY(-5px) scale(1.05)",
+            }}
+            _focus={{
+                outline: "none",
+                boxShadow: "outline",
+                transform: "translateY(-3px) scale(1.03)",
+            }}
+            _active={{
+                transform: "scale(0.98)",
+                boxShadow: "md",
             }}
             bg={bg}
         >
