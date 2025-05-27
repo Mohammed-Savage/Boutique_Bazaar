@@ -1,6 +1,7 @@
 import { Box, Heading, Image, Text, HStack, IconButton, useColorModeValue, Tooltip, Flex, useToast, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, VStack, Input, ModalFooter, Button, useDisclosure, Skeleton, } from '@chakra-ui/react';
 import { FaEdit } from "react-icons/fa";
 import { FcDeleteRow } from "react-icons/fc";
+import { GiMagnifyingGlass } from "react-icons/gi";
 import { useProductStore } from '../store/product.js';
 import { useState } from 'react'
 
@@ -104,6 +105,20 @@ const ProductCard = ({ product }) => {
                 <HStack spacing={2} justifyContent={"space-between"}>
                     <Tooltip label='Edit Product' aria-label='Edit Product' fontSize='md'>
                         <IconButton icon={<FaEdit />} onClick={onOpen} colorScheme='blue' aria-label='Edit Product' />
+                    </Tooltip>
+                    <Tooltip label='View Product' aria-label='View Product' fontSize='md'>
+                        {/* <IconButton icon={<GiMagnifyingGlass />} onClick={() => window.open(`/product/${product.image}`, '_blank')}
+                            colorScheme='green' aria-label='View Product'
+                        /> */}
+                        <IconButton
+                        as={"a"}
+                        href={product.image}
+                        target="_blank"
+                        rel='noopener noreferrer'
+                        icon={<GiMagnifyingGlass />}
+                        colorScheme='green'
+                        aria-label='View Product'
+                        />
                     </Tooltip>
                     <Tooltip label='Delete Product' aria-label='Delete Product' fontSize='md'>
                         <IconButton icon={<FcDeleteRow />} onClick={() => handleDeleteProduct(product._id)}
