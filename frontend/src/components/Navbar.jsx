@@ -7,7 +7,16 @@ import { GiStripedSun } from "react-icons/gi";
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
 
-    return <Container maxW={"1140px"} px={4}>
+    return <Container maxW={"1140px"} px={4}
+        transition="border 0.2s"
+        border="3px solid transparent"
+        borderRadius="md"        // Optional: rounded corners
+        bg={colorMode === "light" ? "white" : "#162456"} // Background color based on mode
+        color={colorMode === "light" ? "gray.800" : "white"} // Text color based on mode
+        _hover={{ borderColor: "blue.500" }} // Border color on hover
+        _focus={{ borderColor: "blue.500" }} // Border color on focus
+        boxShadow="md"           // Optional: shadow for effect
+    >
         <Flex
             h={16}
             alignItems={"center"}
