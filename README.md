@@ -32,22 +32,6 @@ Deployed on: [Render](https://render.com)
 
 ---
 
-## 📁 Folder Structure
-
-Boutique_Bazaar/
-│
-├── backend/ # Express.js server & API routes
-├── frontend/ # React app with Chakra UI
-│ ├── components/ # Reusable React components
-│ ├── pages/ # Page-level components
-│ └── store/ # Zustand store for global state
-│
-├── .gitignore
-├── package.json
-├── README.md
-
----
-
 ## 🛠️ Setup Instructions
 
 ### 1. Clone the repository
